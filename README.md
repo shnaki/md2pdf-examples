@@ -15,23 +15,27 @@
 
 ## クイックスタート
 
+> **前提**: [just](https://github.com/casey/just) が必要です。`winget install Casey.Just` / `brew install just` / `cargo install just` でインストールしてください。
+
 ```bash
+# レシピ一覧を表示
+just
+
 # 全イメージをビルド（初回のみ、数分かかります）
-docker compose build
+just build
 
 # 全ツールで変換を実行
-make all
+just all
 
 # 個別実行
-docker compose run --rm pandoc-xelatex
-docker compose run --rm md-to-pdf
-# ...
+just pandoc-xelatex
+just md-to-pdf
 
 # 出力を確認
 ls outputs/*/
 
-# クリーン
-make clean
+# クリーン（確認プロンプトあり）
+just clean
 ```
 
 ## ディレクトリ構成
@@ -57,7 +61,7 @@ make clean
 ├── outputs/                  # 生成された PDF（git 管理外）
 │   └── <tool>/<sample>.pdf
 ├── docker-compose.yml
-└── Makefile
+└── justfile
 ```
 
 ## 比較結果
