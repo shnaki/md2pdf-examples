@@ -1,0 +1,40 @@
+services:
+  pandoc-xelatex:
+    build: tools/pandoc-xelatex
+    volumes:
+      - .:/work
+    working_dir: /work
+
+  pandoc-typst:
+    build: tools/pandoc-typst
+    volumes:
+      - .:/work
+    working_dir: /work
+
+  pandoc-weasyprint:
+    build: tools/pandoc-weasyprint
+    volumes:
+      - .:/work
+    working_dir: /work
+
+  md-to-pdf:
+    build: tools/md-to-pdf
+    volumes:
+      - .:/work
+    working_dir: /work
+    environment:
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
+  marp:
+    build: tools/marp
+    volumes:
+      - .:/work
+    working_dir: /work
+    environment:
+      - MARP_CHROME_NO_SANDBOX=true
+
+  quarto:
+    build: tools/quarto
+    volumes:
+      - .:/work
+    working_dir: /work
