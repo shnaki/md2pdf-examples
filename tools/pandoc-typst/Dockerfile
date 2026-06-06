@@ -2,12 +2,12 @@ FROM pandoc/extra:latest
 
 ARG TYPST_VERSION=0.13.1
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apk add --no-cache \
     curl \
-    fonts-noto-cjk \
+    xz \
+    font-noto-cjk \
     && curl -L "https://github.com/typst/typst/releases/download/v${TYPST_VERSION}/typst-x86_64-unknown-linux-musl.tar.xz" \
-       | tar -xJ --strip-components=1 -C /usr/local/bin/ \
-    && rm -rf /var/lib/apt/lists/*
+       | tar -xJ --strip-components=1 -C /usr/local/bin/
 
 WORKDIR /work
 COPY convert.sh /usr/local/bin/convert.sh

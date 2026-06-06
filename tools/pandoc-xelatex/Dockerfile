@@ -1,10 +1,9 @@
 FROM pandoc/extra:latest
 
 # Japanese fonts and SVG conversion support
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    fonts-noto-cjk \
-    librsvg2-bin \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache \
+    font-noto-cjk \
+    librsvg
 
 WORKDIR /work
 COPY convert.sh /usr/local/bin/convert.sh
