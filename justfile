@@ -5,9 +5,18 @@ set windows-shell := ["powershell.exe", "-NoProfile", "-Command"]
 default:
     @just --list
 
-# 全 Docker イメージをビルド
+# ベースイメージを事前取得
+pull:
+    docker compose pull --ignore-buildable
+
+# 全 Docker イメージをビルド（docker compose build は Bake でエラーが隠れるため docker build を直接使用）
 build:
-    docker compose build
+    docker build tools/pandoc-xelatex    -t md2pdf-examples-pandoc-xelatex    --progress=plain
+    docker build tools/pandoc-typst      -t md2pdf-examples-pandoc-typst      --progress=plain
+    docker build tools/pandoc-weasyprint -t md2pdf-examples-pandoc-weasyprint --progress=plain
+    docker build tools/md-to-pdf         -t md2pdf-examples-md-to-pdf         --progress=plain
+    docker build tools/marp              -t md2pdf-examples-marp               --progress=plain
+    docker build tools/quarto            -t md2pdf-examples-quarto             --progress=plain
 
 # 全ツールで変換
 all: pandoc-xelatex pandoc-typst pandoc-weasyprint md-to-pdf marp quarto
