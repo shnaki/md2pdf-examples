@@ -1,13 +1,16 @@
 FROM node:20-slim
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    chromium \
-    fonts-noto-cjk \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+# 重いパッケージはレイヤーを分割し、途中クラッシュ時もキャッシュで前進できるようにする
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends ca-certificates
+RUN apt-get install -y --no-install-recommends fonts-noto-cjk
+RUN apt-get install -y --no-install-recommends chromium
+RUN rm -rf /var/lib/apt/lists/*
 
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 ENV PUPPETEER_SKIP_DOWNLOAD=true
+# marp-cli は CHROME_PATH を参照する
+ENV CHROME_PATH=/usr/bin/chromium
 
 RUN NODE_OPTIONS=--jitless npm install -g @marp-team/marp-cli
 
