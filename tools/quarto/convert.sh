@@ -10,7 +10,6 @@ for f in /work/samples/*.md; do
     echo "==> ${base}"
     quarto render "${f}" \
         --to pdf \
-        --output "${base}.pdf" \
         --output-dir "${OUT}" \
         -M lang:ja \
         -M pdf-engine:xelatex \
