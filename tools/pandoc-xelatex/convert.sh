@@ -19,6 +19,7 @@ for f in /work/samples/*.md; do
     pandoc "${f}" \
         -o "${OUT}/${base}.pdf" \
         --pdf-engine=xelatex \
+        --resource-path=/work/samples \
         --include-in-header=/tools/header.tex \
         -V lang=ja \
         -V CJKmainfont="Noto Serif CJK JP" \
@@ -29,7 +30,7 @@ for f in /work/samples/*.md; do
         -V monofont="Noto Sans Mono CJK JP" \
         -V geometry:margin=25mm \
         --toc \
-        --highlight-style=breeze \
+        --highlight-style=breezedark \
         --number-sections \
         2>&1
 done

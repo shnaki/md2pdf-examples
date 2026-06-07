@@ -2,6 +2,7 @@ FROM pandoc/extra:latest
 
 # Japanese fonts and SVG conversion support
 RUN apk add --no-cache \
+    bash \
     font-noto-cjk \
     librsvg
 
