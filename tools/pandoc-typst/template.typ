@@ -20,6 +20,27 @@
   size: 9pt,
 )
 
+// Pandoc Typst writer の組み込みヘルパー定義（カスタムテンプレートでは default から引き継がれないため明示）
+#let horizontalrule = line(start: (25%,0%), end: (75%,0%))
+
+#show terms.item: it => block(breakable: false)[
+  #text(weight: "bold")[#it.term]
+  #block(inset: (left: 1.5em, top: -0.4em))[#it.description]
+]
+
+#set table(
+  inset: 6pt,
+  stroke: none,
+)
+
+#show figure.where(kind: table): set figure.caption(position: top)
+#show figure.where(kind: image): set figure.caption(position: bottom)
+
+$if(highlighting-definitions)$
+// skylighting によるシンタックスハイライト関数
+$highlighting-definitions$
+$endif$
+
 #show heading.where(level: 1): it => {
   pagebreak(weak: true)
   block(above: 1.5em, below: 0.8em)[

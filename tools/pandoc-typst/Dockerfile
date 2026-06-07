@@ -3,6 +3,7 @@ FROM pandoc/extra:latest
 ARG TYPST_VERSION=0.13.1
 
 RUN apk add --no-cache \
+    bash \
     curl \
     xz \
     font-noto-cjk \

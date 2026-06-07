@@ -11,6 +11,7 @@ for f in /work/samples/*.md; do
     pandoc "${f}" \
         -o "${OUT}/${base}.pdf" \
         --pdf-engine=typst \
+        --resource-path=/work/samples \
         --template=/tools/template.typ \
         2>&1
 done
