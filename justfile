@@ -18,6 +18,17 @@ build:
     docker build tools/marp              -t md2pdf-examples-marp               --progress=plain
     docker build tools/quarto            -t md2pdf-examples-quarto             --progress=plain
 
+# キャッシュを無視して全イメージを強制再ビルド。
+# Docker Desktop on Windows では Dockerfile の変更が `build` で反映されない場合がある（BuildKit の
+# キャッシュ判定バグ）。その際はこのレシピを使う。
+rebuild:
+    docker build --no-cache tools/pandoc-xelatex    -t md2pdf-examples-pandoc-xelatex    --progress=plain
+    docker build --no-cache tools/pandoc-typst      -t md2pdf-examples-pandoc-typst      --progress=plain
+    docker build --no-cache tools/pandoc-weasyprint -t md2pdf-examples-pandoc-weasyprint --progress=plain
+    docker build --no-cache tools/md-to-pdf         -t md2pdf-examples-md-to-pdf         --progress=plain
+    docker build --no-cache tools/marp              -t md2pdf-examples-marp               --progress=plain
+    docker build --no-cache tools/quarto            -t md2pdf-examples-quarto             --progress=plain
+
 # 全ツールで変換
 all: pandoc-xelatex pandoc-typst pandoc-weasyprint md-to-pdf marp quarto
 
