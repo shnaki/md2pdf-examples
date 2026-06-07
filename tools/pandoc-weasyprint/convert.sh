@@ -12,6 +12,8 @@ for f in /work/samples/*.md; do
     pandoc "${f}" \
         -t html5 \
         --standalone \
+        --embed-resources \
+        --resource-path=/work/samples \
         --css=/tools/style.css \
         --mathjax \
         --toc \

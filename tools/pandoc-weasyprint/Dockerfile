@@ -1,6 +1,7 @@
 FROM pandoc/core:latest
 
 RUN apk add --no-cache \
+    bash \
     py3-pip \
     py3-cffi \
     pango \
